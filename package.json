@@ -1,0 +1,29 @@
+{
+  "name": "spotify-playlist-builder",
+  "version": "1.0.0",
+  "description": "Playlist builder for spotify",
+  "main": "index.js",
+  "author": "Thor Amorim",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack-dev-server --config ./webpack.config.js"
+  },
+  "devDependencies": {
+    "@types/node": "^9.4.7",
+    "@types/ramda": "types/npm-ramda#dist",
+    "@types/webpack-env": "^1.13.5",
+    "awesome-typescript-loader": "^5.0.0-1",
+    "typescript": "^2.7.2",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12",
+    "webpack-dev-server": "^3.1.1"
+  },
+  "dependencies": {
+    "fluture": "^8.0.2",
+    "preact": "^8.2.7",
+    "ramda": "^0.25.0",
+    "tsmonad": "^0.8.0",
+    "unionize": "^1.0.0",
+    "unistore": "^3.0.4"
+  }
+}
