@@ -21,6 +21,7 @@
   "dependencies": {
     "fluture": "^8.0.2",
     "preact": "^8.2.7",
+    "preact-router": "^2.6.0",
     "ramda": "^0.25.0",
     "tsmonad": "^0.8.0",
     "unionize": "^1.0.0",
