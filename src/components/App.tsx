@@ -1,7 +1,29 @@
 import { h } from 'preact'
+import { maybe } from 'tsmonad'
+import { connect } from 'unistore/preact'
 
-const App = () => (
-  <h1>Hello World!</h1>
-)
+import { AUTH_URL } from '../utils/constants'
+import { Authentication } from '../store/authentication'
 
-export default App
+interface Props {
+  authentication: Authentication
+}
+
+const App = (props: Props) => {
+  const authorization = maybe(props.authentication!)
+    .map(auth => `${auth.token_type} ${auth.access_token}`)
+    .valueOr('')
+
+  return (
+    <div>
+      <h1>Playlists</h1>
+      { !authorization && <a href={AUTH_URL}>Login</a> }
+    </div>
+  )
+}
+
+const states = [
+  'authentication'
+]
+
+export default connect(states)(App)
