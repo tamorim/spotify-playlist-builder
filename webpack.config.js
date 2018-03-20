@@ -20,6 +20,12 @@ module.exports = {
           resolve(__dirname, 'src'),
         ],
         loader: 'awesome-typescript-loader',
+        options: {
+          useCache: true,
+          reportFiles: [
+            'src/**/*.{ts,tsx}',
+          ],
+        },
       },
     ],
   },
@@ -31,11 +37,10 @@ module.exports = {
   target: 'web',
   devtool: 'source-map',
   devServer: {
-    compress: true,
-    historyApiFallback: true,
     hot: true,
     https: false,
     noInfo: true,
+    historyApiFallback: true,
     port: 8080,
   },
 }
