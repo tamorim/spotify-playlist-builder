@@ -3,6 +3,7 @@ const { resolve } = require('path')
 const { CheckerPlugin } = require('awesome-typescript-loader')
 
 module.exports = {
+  mode: 'development',
   entry: './src/index',
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json', '.jsx', '.css'],
