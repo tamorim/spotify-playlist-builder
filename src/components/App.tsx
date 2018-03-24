@@ -2,6 +2,7 @@ import { h } from 'preact'
 import { maybe } from 'tsmonad'
 import { connect } from 'unistore/preact'
 
+import User from './User'
 import Playlists from './Playlists'
 import { AUTH_URL } from '../utils/constants'
 import { Authentication } from '../store/authentication'
@@ -18,6 +19,7 @@ const App = (props: Props) => {
   return (
     <div>
       <h1>Playlists</h1>
+      <User authorization={authorization || null} />
       { !authorization && <a href={AUTH_URL}>Login</a> }
       <Playlists authorization={authorization || null} />
     </div>
