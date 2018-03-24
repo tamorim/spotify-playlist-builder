@@ -3,8 +3,6 @@ import { __, compose, assoc, prop } from 'ramda'
 import { Store } from './index'
 import { getPlaylists } from '../fetcher'
 
-export type Type = 'user' | 'playlist' | 'artist' | 'album'
-
 export interface Tracks {
   href: string,
   total: number
@@ -15,7 +13,7 @@ export interface Owner {
   external_urls: ExternalUrls,
   href: string,
   id: string,
-  type: Type,
+  type: 'user',
   uri: string
 }
 
@@ -40,7 +38,7 @@ export interface PlaylistItem {
   public: boolean,
   snapshot_id: string,
   tracks: Tracks,
-  type: Type,
+  type: 'playlist',
   uri: string
 }
 
