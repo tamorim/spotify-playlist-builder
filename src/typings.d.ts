@@ -6,13 +6,13 @@ declare module 'unistore' {
     BoundAction,
     Store
   } from 'unistore'
-  export default function createStore<K>(state?: K): Store<K>;
+  export default function createStore<K>(state?: K): Store<K>
   export type BoundAction = (...args: any[]) => void
   export interface Store<K> {
-    action(action: Action<K>): BoundAction,
-    setState(update: object, overwrite?: boolean, action?: Action<K>): void,
-    subscribe(f: Listener<K>): Unsubscribe,
-    unsubscribe(f: Listener<K>): void,
+    action(action: Action<K>): BoundAction
+    setState(update: object, overwrite?: boolean, action?: Action<K>): void
+    subscribe(f: Listener<K>): Unsubscribe
+    unsubscribe(f: Listener<K>): void
     getState(): K
   }
   export {
@@ -31,7 +31,7 @@ declare module 'unistore' {
 
 declare module 'unistore/devtools' {
   import { Store } from 'unistore'
-  export function devtools<T>(store: Store<T>): Store<T>
+  export default function devtools<T>(store: Store<T>): Store<T>
 }
 
 declare module 'unistore/preact' {

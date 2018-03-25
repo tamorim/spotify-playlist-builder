@@ -3,14 +3,14 @@ import { h, Component } from 'preact'
 import { connect } from 'unistore/preact'
 
 import { Store } from '../store'
-import { actions, User as UserType } from '../store/user'
+import { actions } from '../store/user'
 
 interface ComponentProps {
   authorization: string | null
 }
 
 interface ConnectProps {
-  user: UserType,
+  user: Store['user']
   getUser: (authorization: string) => void
 }
 
@@ -18,11 +18,10 @@ interface Props extends ComponentProps, ConnectProps {}
 
 class User extends Component<Props, {}> {
   componentDidMount() {
-    maybe(this.props.authorization!)
-      .caseOf({
-        just: authorization => this.props.getUser(authorization),
-        nothing: () => {}
-      })
+    const { authorization } = this.props
+    if (authorization) {
+      this.props.getUser(authorization)
+    }
   }
 
   render(props: Props) {

@@ -3,7 +3,7 @@ import { Component } from 'preact'
 import { route } from 'preact-router'
 
 interface Props {
-  to: string,
+  to: string
   onEnter?: Function
 }
 
