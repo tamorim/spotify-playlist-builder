@@ -3,25 +3,37 @@ import { maybe } from 'tsmonad'
 import { connect } from 'unistore/preact'
 
 import User from './User'
+import { Store } from '../store'
 import Playlists from './Playlists'
-import { AUTH_URL } from '../utils/constants'
-import { Authentication } from '../store/authentication'
+import LoginButton from './LoginButton'
 
 interface Props {
-  authentication: Authentication
+  authentication: Store['authentication']
 }
 
 const App = (props: Props) => {
-  const authorization = maybe(props.authentication!)
-    .map(auth => `${auth.token_type} ${auth.access_token}`)
-    .valueOr('')
-
   return (
     <div>
       <h1>Playlists</h1>
-      <User authorization={authorization || null} />
-      { !authorization && <a href={AUTH_URL}>Login</a> }
-      <Playlists authorization={authorization || null} />
+      {
+        maybe(props.authentication!)
+          .map(auth => `${auth.token_type} ${auth.access_token}`)
+          .caseOf({
+            just: auth => (
+              <div>
+                <User authorization={auth} />
+                <Playlists authorization={auth} />
+              </div>
+            ),
+            nothing: () => (
+              <div>
+                <LoginButton />
+                <User authorization={null} />
+                <Playlists authorization={null} />
+              </div>
+            )
+          })
+      }
     </div>
   )
 }
