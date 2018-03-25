@@ -1,0 +1,19 @@
+{
+  "extends": ["tslint:recommended"],
+  "rules": {
+    "semicolon": {
+      "options": ["never"]
+    },
+    "quotemark": {
+      "options": ["single", "jsx-double"]
+    },
+    "ordered-imports": false,
+    "arrow-parens": false,
+    "member-access": false,
+    "object-literal-sort-keys": false,
+    "variable-name": false,
+    "no-var-requires": false,
+    "max-line-length": false
+  },
+  "defaultSeverity": "error"
+}

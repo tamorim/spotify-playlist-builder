@@ -2,21 +2,21 @@ import { maybe } from 'tsmonad'
 import { h, Component } from 'preact'
 import { connect } from 'unistore/preact'
 
-import { Store } from '../store'
+import { IStore } from '../store'
 import { actions } from '../store/user'
 
-interface ComponentProps {
+interface IComponentProps {
   authorization: string | null
 }
 
-interface ConnectProps {
-  user: Store['user']
+interface IConnectProps {
+  user: IStore['user']
   getUser: (authorization: string) => void
 }
 
-interface Props extends ComponentProps, ConnectProps {}
+interface IProps extends IComponentProps, IConnectProps {}
 
-class User extends Component<Props, {}> {
+class User extends Component<IProps, {}> {
   componentDidMount() {
     const { authorization } = this.props
     if (authorization) {
@@ -24,17 +24,17 @@ class User extends Component<Props, {}> {
     }
   }
 
-  render(props: Props) {
+  render(props: IProps) {
     return maybe(props.user!)
       .caseOf({
         just: user => <h2>{ user.display_name }</h2>,
-        nothing: () => null
+        nothing: () => null,
       })
   }
 }
 
 const states = [
-  'user'
+  'user',
 ]
 
-export default connect<ComponentProps, {}, Store, ConnectProps>(states, actions)(User)
+export default connect<IComponentProps, {}, IStore, IConnectProps>(states, actions)(User)

@@ -1,23 +1,23 @@
 import { __, compose, assoc, prop } from 'ramda'
 
-import { Store } from './index'
+import { IStore } from './index'
 import { getPlaylists } from '../fetcher'
 import { PlaylistsResponse, Playlists } from '../spotify'
 
-interface PlaylistState {
+interface IPlaylistState {
   playlists: Playlists
 }
 
-const playlistItems = compose<PlaylistsResponse, Playlists, PlaylistState>(
+const playlistItems = compose<PlaylistsResponse, Playlists, IPlaylistState>(
   assoc('playlists', __, {}),
-  prop('items')
+  prop('items'),
 )
 
 export const actions = {
-  getPlaylists: (_state: Store, authorization: string) => (
+  getPlaylists: (_state: IStore, authorization: string) => (
     getPlaylists(authorization)
       .map(playlistItems)
       .promise()
       .catch(console.error)
-  )
+  ),
 }

@@ -2,25 +2,25 @@ import { maybe, Maybe } from 'tsmonad'
 import { h, Component } from 'preact'
 import { connect } from 'unistore/preact'
 
-import { Store } from '../store'
+import { IStore } from '../store'
 import { actions } from '../store/tracks'
 import { PlaylistTrack } from '../spotify'
-import { GetPlaylistTracksParams } from '../fetcher'
+import { IGetPlaylistTracksParams } from '../fetcher'
 
-interface ComponentProps {
+interface IComponentProps {
   userId: string | null
   playlistId: string | null
   authorization: string | null
 }
 
-interface ConnectProps {
-  tracks: Store['tracks']
-  getPlaylistTracks: (params: GetPlaylistTracksParams) => void
+interface IConnectProps {
+  tracks: IStore['tracks']
+  getPlaylistTracks: (params: IGetPlaylistTracksParams) => void
 }
 
-interface Props extends ComponentProps, ConnectProps {}
+interface IProps extends IComponentProps, IConnectProps {}
 
-class Tracks extends Component<Props, {}> {
+class Tracks extends Component<IProps, {}> {
   componentDidMount() {
     const { userId, playlistId, authorization } = this.props
     if (userId && playlistId && authorization) {
@@ -28,10 +28,10 @@ class Tracks extends Component<Props, {}> {
     }
   }
 
-  render(props: Props) {
+  render(props: IProps) {
     return Maybe.all({
       tracks: maybe(props.tracks),
-      playlistId: maybe(props.playlistId)
+      playlistId: maybe(props.playlistId),
     })
     .map(({ playlistId, tracks }) => tracks[playlistId])
     .caseOf({
@@ -40,13 +40,13 @@ class Tracks extends Component<Props, {}> {
           { tracks.map(({ track }: PlaylistTrack) => <p>{ track.name }</p>) }
         </div>
       ),
-      nothing: () => <p>No tracks :(</p>
+      nothing: () => <p>No tracks :(</p>,
     })
   }
 }
 
 const states = [
-  'tracks'
+  'tracks',
 ]
 
-export default connect<ComponentProps, {}, Store, ConnectProps>(states, actions)(Tracks)
+export default connect<IComponentProps, {}, IStore, IConnectProps>(states, actions)(Tracks)

@@ -2,14 +2,14 @@ import { maybe } from 'tsmonad'
 import { Component } from 'preact'
 import { route } from 'preact-router'
 
-interface Props {
+interface IProps {
   to: string
-  onEnter?: Function
+  onEnter?: () => void
 }
 
-class Redirect extends Component<Props, {}> {
+class Redirect extends Component<IProps, {}> {
   componentWillMount() {
-    maybe(this.props.onEnter as Function)
+    maybe(this.props.onEnter!)
       .map(onEnter => onEnter())
     route(this.props.to, true)
   }

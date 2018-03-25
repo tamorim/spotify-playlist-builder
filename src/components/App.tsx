@@ -3,15 +3,15 @@ import { maybe } from 'tsmonad'
 import { connect } from 'unistore/preact'
 
 import User from './User'
-import { Store } from '../store'
+import { IStore } from '../store'
 import Playlists from './Playlists'
 import LoginButton from './LoginButton'
 
-interface Props {
-  authentication: Store['authentication']
+interface IProps {
+  authentication: IStore['authentication']
 }
 
-const App = (props: Props) => {
+const App = (props: IProps) => {
   return (
     <div>
       <h1>Playlists</h1>
@@ -31,7 +31,7 @@ const App = (props: Props) => {
                 <User authorization={null} />
                 <Playlists authorization={null} />
               </div>
-            )
+            ),
           })
       }
     </div>
@@ -39,7 +39,7 @@ const App = (props: Props) => {
 }
 
 const states = [
-  'authentication'
+  'authentication',
 ]
 
 export default connect(states)(App)

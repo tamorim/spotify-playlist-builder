@@ -4,20 +4,20 @@ import { USER_URL, PLAYLISTS_URL, playlistTracksUrl } from './utils/urls'
 
 const fetchF = encaseP2(fetch)
 
-export interface FetcherParams {
+export interface IFetcherParams {
   url: string
   authorization: string
   options?: RequestInit
 }
 
-export const fetcher = ({ url, authorization, options }: FetcherParams) =>
+export const fetcher = ({ url, authorization, options }: IFetcherParams) =>
   fetchF(
     url,
     {
       mode: 'cors',
       headers: { authorization },
-      ...options
-    }
+      ...options,
+    },
   )
   .chain(res => res.ok ? of(res) : reject(res))
   .chain((res: Response) => tryP(() => res.json()))
@@ -28,11 +28,11 @@ export const getPlaylists = (authorization: string) =>
 export const getUser = (authorization: string) =>
   fetcher({ url: USER_URL, authorization })
 
-export interface GetPlaylistTracksParams {
+export interface IGetPlaylistTracksParams {
   userId: string
   playlistId: string
   authorization: string
 }
 
-export const getPlaylistTracks = ({ userId, playlistId, authorization }: GetPlaylistTracksParams) =>
+export const getPlaylistTracks = ({ userId, playlistId, authorization }: IGetPlaylistTracksParams) =>
   fetcher({ url: playlistTracksUrl(userId, playlistId), authorization })

@@ -27,7 +27,7 @@ const renderApp = () => {
       </Router>
     </Provider>,
     container,
-    container.lastChild as Element
+    container.lastChild as Element,
   )
 }
 
