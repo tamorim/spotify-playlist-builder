@@ -2,15 +2,16 @@ import { maybe } from 'tsmonad'
 import { h, Component } from 'preact'
 import { connect } from 'unistore/preact'
 
+import Tracks from './Tracks'
 import { Store } from '../store'
-import { actions, Playlists as PlaylistsType } from '../store/playlists'
+import { actions } from '../store/playlists'
 
 interface ComponentProps {
   authorization: string | null
 }
 
 interface ConnectProps {
-  playlists: PlaylistsType,
+  playlists: Store['playlists']
   getPlaylists: (authorization: string) => void
 }
 
@@ -18,11 +19,10 @@ interface Props extends ComponentProps, ConnectProps {}
 
 class Playlists extends Component<Props, {}> {
   componentDidMount() {
-    maybe(this.props.authorization!)
-      .caseOf({
-        just: authorization => this.props.getPlaylists(authorization),
-        nothing: () => {}
-      })
+    const { authorization } = this.props
+    if (authorization) {
+      this.props.getPlaylists(authorization)
+    }
   }
 
   render(props: Props) {
@@ -30,7 +30,20 @@ class Playlists extends Component<Props, {}> {
       .caseOf({
         just: playlists => (
           <div>
-            { playlists.map(playlist => <p>{ playlist.name }</p>) }
+            {
+              playlists.map(playlist => (
+                <div>
+                  <p>{playlist.name}</p>
+                  <div class="ml4">
+                    <Tracks
+                      playlistId={playlist.id}
+                      userId={playlist.owner.id}
+                      authorization={props.authorization}
+                    />
+                  </div>
+                </div>
+              ))
+            }
           </div>
         ),
         nothing: () => <p>No playlists :(</p>
