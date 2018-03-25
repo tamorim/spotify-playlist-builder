@@ -1,17 +1,20 @@
 import createStore from 'unistore'
 
-import user, { User } from './user'
-import playlists, { Playlists } from './playlists'
-import authentication, { Authentication } from './authentication'
+import { TracksState } from './tracks'
+import { User, Playlists, Authentication } from '../spotify'
+
+const devtools = require('unistore/devtools')
 
 export interface Store {
-  user: User,
-  playlists: Playlists,
-  authentication: Authentication
+  user: User | null
+  tracks: TracksState | null
+  playlists: Playlists | null
+  authentication: Authentication | null
 }
 
-export default createStore<Store>({
-  user,
-  playlists,
-  authentication
-})
+export default devtools(createStore<Store>({
+  user: null,
+  tracks: null,
+  playlists: null,
+  authentication: null
+}))
