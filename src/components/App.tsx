@@ -13,25 +13,20 @@ interface IProps {
 
 const App = (props: IProps) => {
   return (
-    <div>
-      <h1>Playlists</h1>
+    <div class="flex flex-wrap w-100 justify-center sans-serif">
       {
         maybe(props.authentication!)
           .map(auth => `${auth.token_type} ${auth.access_token}`)
           .caseOf({
-            just: auth => (
-              <div>
-                <User authorization={auth} />
-                <Playlists authorization={auth} />
-              </div>
-            ),
-            nothing: () => (
-              <div>
-                <LoginButton />
-                <User authorization={null} />
-                <Playlists authorization={null} />
-              </div>
-            ),
+            just: auth => ([
+              <User authorization={auth} />,
+              <Playlists authorization={auth} />,
+            ]),
+            nothing: () => ([
+              <LoginButton />,
+              <User authorization={null} />,
+              <Playlists authorization={null} />,
+            ]),
           })
       }
     </div>
