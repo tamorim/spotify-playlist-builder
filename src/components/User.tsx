@@ -27,7 +27,11 @@ class User extends Component<IProps, {}> {
   render(props: IProps) {
     return maybe(props.user!)
       .caseOf({
-        just: user => <h2>{ user.display_name }</h2>,
+        just: user => (
+          <div class="w-100 pv2 tc fw7 green bg-black-10">
+            { user.display_name }
+          </div>
+        ),
         nothing: () => null,
       })
   }

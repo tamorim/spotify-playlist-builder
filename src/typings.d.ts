@@ -37,3 +37,12 @@ declare module 'unistore/devtools' {
 declare module 'unistore/preact' {
   export { connect, Provider } from 'unistore'
 }
+
+declare module 'preact-router/match' {
+  export interface LinkProps extends JSX.HTMLAttributes {
+    href: string
+    class?: string
+    activeClassName?: string
+  }
+  export function Link(props: LinkProps): preact.VNode
+}

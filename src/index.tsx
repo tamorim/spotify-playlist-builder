@@ -3,6 +3,7 @@ import { h, render } from 'preact'
 import { Provider } from 'unistore/preact'
 
 import store from './store'
+import Tracks from './components/Tracks'
 import Redirect from './components/Redirect'
 import { actions } from './store/authentication'
 
@@ -24,6 +25,7 @@ const renderApp = () => {
           onEnter={onCallbackEnter}
         />
         <App default />
+        <Tracks path="/:playlistId/tracks" />
       </Router>
     </Provider>,
     container,
