@@ -7,8 +7,7 @@ import { actions } from '../store/tracks'
 import { IGetPlaylistTracksParams } from '../fetcher'
 
 interface IComponentProps {
-  path: string
-  playlistId: string
+  playlistId?: string
 }
 
 interface IConnectProps {
@@ -24,15 +23,15 @@ class Tracks extends Component<IProps, {}> {
   componentDidMount() {
     const { user, playlistId, authentication } = this.props
     this.props.getPlaylistTracks({
-      playlistId,
       userId: user!.id,
+      playlistId: playlistId!,
       authorization: `${authentication!.token_type} ${authentication!.access_token}`,
     })
   }
 
   render(props: IProps) {
     return maybe(props.tracks!)
-      .map(tracks => tracks[props.playlistId])
+      .map(tracks => tracks[props.playlistId!])
       .caseOf({
         just: tracks => (
           <div>
