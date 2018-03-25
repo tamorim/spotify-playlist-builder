@@ -151,7 +151,7 @@ export interface PlaylistTrack {
   track: TrackSimple
 }
 
-export type Tracks = TrackSimple[]
+export type Tracks = PlaylistTrack[]
 
 export interface Authentication extends Dictionary<string> {
   access_token: string
