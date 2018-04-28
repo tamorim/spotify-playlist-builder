@@ -2,6 +2,7 @@
   "compilerOptions": {
     "jsx": "react",
     "jsxFactory": "h",
+    "lib": ["dom", "esnext", "scripthost"],
     "target": "es5",
     "module": "commonjs",
     "pretty": true,
@@ -12,10 +13,6 @@
     "removeComments": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }
