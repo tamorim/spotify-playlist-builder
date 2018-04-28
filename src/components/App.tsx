@@ -1,5 +1,4 @@
 import { h } from 'preact'
-import { maybe } from 'tsmonad'
 import { connect } from 'unistore/preact'
 
 import User from './User'
@@ -11,22 +10,19 @@ interface IProps {
   authentication: IStore['authentication']
 }
 
-const App = (props: IProps) => {
+const App = ({ authentication }: IProps) => {
+  const auth = authentication
+    ? `${authentication.token_type} ${authentication.access_token}`
+    : null
   return (
     <div class="flex flex-wrap w-100 justify-center sans-serif">
-      {maybe(props.authentication!)
-        .map(auth => `${auth.token_type} ${auth.access_token}`)
-        .caseOf({
-          just: auth => [
-            <User authorization={auth} />,
-            <Playlists authorization={auth} />,
-          ],
-          nothing: () => [
+      {auth
+        ? [<User authorization={auth} />, <Playlists authorization={auth} />]
+        : [
             <LoginButton />,
             <User authorization={null} />,
             <Playlists authorization={null} />,
-          ],
-        })}
+          ]}
     </div>
   )
 }

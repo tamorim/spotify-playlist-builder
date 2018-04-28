@@ -1,4 +1,3 @@
-import { maybe } from 'tsmonad'
 import { h, Component } from 'preact'
 import { connect } from 'unistore/preact'
 
@@ -24,15 +23,10 @@ class User extends Component<IProps, {}> {
     }
   }
 
-  render(props: IProps) {
-    return maybe(props.user!).caseOf({
-      just: user => (
-        <div class="w-100 pv2 tc fw7 green bg-black-10">
-          {user.display_name}
-        </div>
-      ),
-      nothing: () => null,
-    })
+  render({ user }: IProps) {
+    return user ? (
+      <div class="w-100 pv2 tc fw7 green bg-black-10">{user.display_name}</div>
+    ) : null
   }
 }
 

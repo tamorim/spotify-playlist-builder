@@ -1,5 +1,3 @@
-import { Dictionary } from 'ramda'
-
 export interface IFollowers {
   href: string | null
   total: number
@@ -153,7 +151,7 @@ export interface IPlaylistTrack {
 
 export type Tracks = IPlaylistTrack[]
 
-export interface IAuthentication extends Dictionary<string> {
+export interface IAuthentication {
   access_token: string
   token_type: 'Bearer'
   expires_in: string

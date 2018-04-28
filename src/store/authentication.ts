@@ -1,6 +1,3 @@
-import { maybe } from 'tsmonad'
-import { compose, map, nth, split, fromPairs } from 'ramda'
-
 import { IStore } from './index'
 import { IAuthentication } from '../spotify'
 
@@ -10,21 +7,21 @@ export interface IAuthenticationPair extends Array<string> {
   length: 2
 }
 
-const splitParams = compose(nth(1), split('#'))
+const splitParams = (str: string) => str.split('#')[1]
 
-const paramsFromString = (x: string) => {
-  const a = split('&', x)
-  const b = map(split('='), a) as IAuthenticationPair[]
-  const c = fromPairs(b) as IAuthentication
+const paramsFromString = (str: string) => {
+  const a = str.split('&')
+  const b = a.map(x => x.split('=')) as IAuthenticationPair[]
+  const c = b.reduce((acc: any, [key, value]) => {
+    acc[key] = value
+    return acc
+  }, {}) as IAuthentication
   return c
 }
 
 export const actions = {
-  getAuthentication: (_state: IStore, url: string) =>
-    maybe(splitParams(url))
-      .map(paramsFromString)
-      .caseOf({
-        just: authentication => ({ authentication }),
-        nothing: () => ({}),
-      }),
+  getAuthentication: (_state: IStore, url: string) => {
+    const strParams = splitParams(url)
+    return strParams ? { authentication: paramsFromString(strParams) } : {}
+  },
 }

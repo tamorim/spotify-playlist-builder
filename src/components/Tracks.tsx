@@ -1,4 +1,3 @@
-import { maybe } from 'tsmonad'
 import { h, Component } from 'preact'
 import { connect } from 'unistore/preact'
 
@@ -31,21 +30,18 @@ class Tracks extends Component<IProps, {}> {
     })
   }
 
-  render(props: IProps) {
-    return maybe(props.tracks!)
-      .map(tracks => tracks[props.playlistId!])
-      .caseOf({
-        just: tracks => (
-          <div>
-            {tracks.map(({ track }) => (
-              <div class="db pa4 f3 fw7 no-underline white bg-black-80 bb b--white">
-                {track.name}
-              </div>
-            ))}
+  render({ tracks, playlistId }: IProps) {
+    return tracks ? (
+      <div>
+        {tracks[playlistId!].map(({ track }) => (
+          <div class="db pa4 f3 fw7 no-underline white bg-black-80 bb b--white">
+            {track.name}
           </div>
-        ),
-        nothing: () => <p>No tracks :(</p>,
-      })
+        ))}
+      </div>
+    ) : (
+      <p>No tracks :(</p>
+    )
   }
 }
 

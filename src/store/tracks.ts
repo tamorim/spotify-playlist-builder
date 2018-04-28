@@ -14,12 +14,11 @@ export const actions = (store: UnistoreStore<IStore>) => ({
     { userId, playlistId, authorization }: IGetPlaylistTracksParams
   ) =>
     getPlaylistTracks({ userId, playlistId, authorization })
-      .map((playlistTracks: IPlaylistTracksResponse) => ({
+      .then((playlistTracks: IPlaylistTracksResponse) => ({
         tracks: {
           ...store.getState().tracks,
           [playlistId]: playlistTracks.items,
         },
       }))
-      .promise()
       .catch(console.error),
 })

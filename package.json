@@ -10,7 +10,6 @@
   },
   "devDependencies": {
     "@types/node": "^9.4.7",
-    "@types/ramda": "types/npm-ramda#dist",
     "@types/webpack-env": "^1.13.5",
     "awesome-typescript-loader": "^5.0.0-1",
     "prettier": "^1.12.1",
@@ -21,12 +20,8 @@
     "webpack-dev-server": "^3.1.1"
   },
   "dependencies": {
-    "fluture": "^8.0.2",
     "preact": "^8.2.7",
     "preact-router": "^2.6.0",
-    "ramda": "^0.25.0",
-    "tsmonad": "^0.8.0",
-    "unionize": "^1.0.0",
     "unistore": "^3.0.4"
   }
 }

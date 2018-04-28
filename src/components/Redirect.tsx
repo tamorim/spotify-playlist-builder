@@ -1,4 +1,3 @@
-import { maybe } from 'tsmonad'
 import { Component } from 'preact'
 import { route } from 'preact-router'
 
@@ -9,7 +8,10 @@ interface IProps {
 
 class Redirect extends Component<IProps, {}> {
   componentWillMount() {
-    maybe(this.props.onEnter!).map(onEnter => onEnter())
+    const { onEnter } = this.props
+    if (onEnter) {
+      onEnter()
+    }
     route(this.props.to, true)
   }
 

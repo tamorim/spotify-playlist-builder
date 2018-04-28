@@ -1,8 +1,4 @@
-import { tryP, encaseP2, of, reject } from 'fluture'
-
 import { USER_URL, PLAYLISTS_URL, playlistTracksUrl } from './utils/urls'
-
-const fetchF = encaseP2(fetch)
 
 export interface IFetcherParams {
   url: string
@@ -11,13 +7,18 @@ export interface IFetcherParams {
 }
 
 export const fetcher = ({ url, authorization, options }: IFetcherParams) =>
-  fetchF(url, {
+  fetch(url, {
     mode: 'cors',
     headers: { authorization },
     ...options,
   })
-    .chain(res => (res.ok ? of(res) : reject(res)))
-    .chain((res: Response) => tryP(() => res.json()))
+    .then(res => {
+      if (!res.ok) {
+        throw res
+      }
+      return res
+    })
+    .then((res: Response) => res.json())
 
 export const getPlaylists = (authorization: string) =>
   fetcher({ url: PLAYLISTS_URL, authorization })

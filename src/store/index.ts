@@ -1,7 +1,7 @@
 import createStore from 'unistore'
 
 import { ITracksState } from './tracks'
-import { IUser, Playlists, IAuthenticationn } from '../spotify'
+import { IUser, Playlists, IAuthentication } from '../spotify'
 
 const devtools = require('unistore/devtools')
 
