@@ -1,3 +1,5 @@
+/* tslint:disable:interface-name */
+
 declare module 'unistore' {
   import { Listener, Unsubscribe, Action, BoundAction, Store } from 'unistore'
   export default function createStore<K>(state?: K): Store<K>

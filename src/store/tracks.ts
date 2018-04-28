@@ -1,7 +1,7 @@
 import { Store as UnistoreStore } from 'unistore'
 
 import { IStore } from './index'
-import { PlaylistTracksResponse, Tracks } from '../spotify'
+import { IPlaylistTracksResponse, Tracks } from '../spotify'
 import { getPlaylistTracks, IGetPlaylistTracksParams } from '../fetcher'
 
 export interface ITracksState {
@@ -14,7 +14,7 @@ export const actions = (store: UnistoreStore<IStore>) => ({
     { userId, playlistId, authorization }: IGetPlaylistTracksParams
   ) =>
     getPlaylistTracks({ userId, playlistId, authorization })
-      .map((playlistTracks: PlaylistTracksResponse) => ({
+      .map((playlistTracks: IPlaylistTracksResponse) => ({
         tracks: {
           ...store.getState().tracks,
           [playlistId]: playlistTracks.items,

@@ -2,13 +2,13 @@ import { __, compose, assoc, prop } from 'ramda'
 
 import { IStore } from './index'
 import { getPlaylists } from '../fetcher'
-import { PlaylistsResponse, Playlists } from '../spotify'
+import { IPlaylistsResponse, Playlists } from '../spotify'
 
 interface IPlaylistState {
   playlists: Playlists
 }
 
-const playlistItems = compose<PlaylistsResponse, Playlists, IPlaylistState>(
+const playlistItems = compose<IPlaylistsResponse, Playlists, IPlaylistState>(
   assoc('playlists', __, {}),
   prop('items')
 )

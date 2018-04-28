@@ -1,71 +1,71 @@
 import { Dictionary } from 'ramda'
 
-export interface Followers {
+export interface IFollowers {
   href: string | null
   total: number
 }
 
-export interface PlaylistItemTracks {
+export interface IPlaylistItemTracks {
   href: string
   total: number
 }
 
-export interface Owner {
+export interface IOwner {
   display_name: string
-  external_urls: ExternalUrls
+  external_urls: IExternalUrls
   href: string
   id: string
   type: 'user'
   uri: string
 }
 
-export interface Image {
+export interface IImage {
   url: string
   width: number | null
   height: number | null
 }
 
-export interface ExternalUrls {
+export interface IExternalUrls {
   [key: string]: string
 }
 
-export interface User {
+export interface IUser {
   country: string
   display_name: string | null
-  external_urls: ExternalUrls
-  followers: Followers
+  external_urls: IExternalUrls
+  followers: IFollowers
   href: string
   id: string
-  images: Image[]
+  images: IImage[]
   type: 'user'
   uri: string
 }
 
-export interface PlaylistItem {
+export interface IPlaylistItem {
   collaborative: boolean
-  external_urls: ExternalUrls
+  external_urls: IExternalUrls
   href: string
   id: string
-  images: Image[]
+  images: IImage[]
   name: string
-  owner: Owner
+  owner: IOwner
   public: boolean
   snapshot_id: string
-  tracks: PlaylistItemTracks
+  tracks: IPlaylistItemTracks
   type: 'playlist'
   uri: string
 }
 
-export interface PlaylistsResponse {
+export interface IPlaylistsResponse {
   href: string
-  items: PlaylistItem[]
+  items: IPlaylistItem[]
 }
 
-export type Playlists = PlaylistItem[]
+export type Playlists = IPlaylistItem[]
 
-export interface PlaylistTracksResponse {
+export interface IPlaylistTracksResponse {
   href: string
-  items: PlaylistTrack[]
+  items: IPlaylistTrack[]
   limit: number
   next: number | null
   offset: number
@@ -73,8 +73,8 @@ export interface PlaylistTracksResponse {
   total: number
 }
 
-export interface Artist {
-  external_urls: ExternalUrls
+export interface IArtist {
+  external_urls: IExternalUrls
   href: string
   id: string
   name: string
@@ -82,15 +82,15 @@ export interface Artist {
   uri: string
 }
 
-export interface AlbumSimple {
+export interface IAlbumSimple {
   album_group?: 'album' | 'single' | 'compilation' | 'appears_on'
   album_type: 'album' | 'single' | 'compilation'
-  artists: Artist[]
+  artists: IArtist[]
   available_markets: string[]
-  external_urls: ExternalUrls
+  external_urls: IExternalUrls
   href: string
   id: string
-  images: Image[]
+  images: IImage[]
   name: string
   release_date: string
   release_date_precision: 'year' | 'month' | 'day'
@@ -98,36 +98,36 @@ export interface AlbumSimple {
   uri: string
 }
 
-export interface LinkedFrom {
-  external_urls: ExternalUrls
+export interface ILinkedFrom {
+  external_urls: IExternalUrls
   href: string
   id: string
   type: 'track'
   uri: string
 }
 
-export interface Restrictions {
+export interface IRestrictions {
   reason: string
 }
 
-export interface ExternalIds {
+export interface IExternalIds {
   [key: string]: string
 }
 
-export interface TrackSimple {
-  album: AlbumSimple[]
-  artists: Artist[]
+export interface ITrackSimple {
+  album: IAlbumSimple[]
+  artists: IArtist[]
   available_markets: string[]
   disc_number: number
   duration_ms: number
   explicit: boolean
-  external_ids: ExternalIds
-  external_urls: ExternalUrls
+  external_ids: IExternalIds
+  external_urls: IExternalUrls
   href: string
   id: string
   is_playable: boolean
-  linked_from: LinkedFrom
-  restrictions: Restrictions
+  linked_from: ILinkedFrom
+  restrictions: IRestrictions
   name: string
   popularity: number
   preview_url: string | null
@@ -136,24 +136,24 @@ export interface TrackSimple {
   uri: string
 }
 
-export interface AddedBy {
-  external_urls: ExternalUrls
+export interface IAddedBy {
+  external_urls: IExternalUrls
   href: string
   id: string
   type: 'user'
   uri: string
 }
 
-export interface PlaylistTrack {
+export interface IPlaylistTrack {
   added_at: string | null
-  added_by: AddedBy
+  added_by: IAddedBy
   is_local: boolean
-  track: TrackSimple
+  track: ITrackSimple
 }
 
-export type Tracks = PlaylistTrack[]
+export type Tracks = IPlaylistTrack[]
 
-export interface Authentication extends Dictionary<string> {
+export interface IAuthentication extends Dictionary<string> {
   access_token: string
   token_type: 'Bearer'
   expires_in: string
