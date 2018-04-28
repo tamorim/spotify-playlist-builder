@@ -11,25 +11,20 @@ const container = document.getElementById('root') as HTMLElement
 
 const boundGetAuthentication = store.action(actions.getAuthentication)
 
-const onCallbackEnter = () =>
-  boundGetAuthentication(window.location.href)
+const onCallbackEnter = () => boundGetAuthentication(window.location.href)
 
 const renderApp = () => {
   const App = require('./components/App').default
   render(
     <Provider store={store}>
       <Router>
-        <Redirect
-          path="/callback"
-          to="/"
-          onEnter={onCallbackEnter}
-        />
+        <Redirect path="/callback" to="/" onEnter={onCallbackEnter} />
         <App default />
         <Tracks path="/:playlistId/tracks" />
       </Router>
     </Provider>,
     container,
-    container.lastChild as Element,
+    container.lastChild as Element
   )
 }
 

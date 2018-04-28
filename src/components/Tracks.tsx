@@ -25,7 +25,9 @@ class Tracks extends Component<IProps, {}> {
     this.props.getPlaylistTracks({
       userId: user!.id,
       playlistId: playlistId!,
-      authorization: `${authentication!.token_type} ${authentication!.access_token}`,
+      authorization: `${authentication!.token_type} ${
+        authentication!.access_token
+      }`,
     })
   }
 
@@ -35,13 +37,11 @@ class Tracks extends Component<IProps, {}> {
       .caseOf({
         just: tracks => (
           <div>
-            {
-              tracks.map(({ track }) => (
-                <div class="db pa4 f3 fw7 no-underline white bg-black-80 bb b--white">
-                  { track.name }
-                </div>
-              ))
-            }
+            {tracks.map(({ track }) => (
+              <div class="db pa4 f3 fw7 no-underline white bg-black-80 bb b--white">
+                {track.name}
+              </div>
+            ))}
           </div>
         ),
         nothing: () => <p>No tracks :(</p>,
@@ -49,10 +49,9 @@ class Tracks extends Component<IProps, {}> {
   }
 }
 
-const states = [
-  'user',
-  'tracks',
-  'authentication',
-]
+const states = ['user', 'tracks', 'authentication']
 
-export default connect<IComponentProps, {}, IStore, IConnectProps>(states, actions)(Tracks)
+export default connect<IComponentProps, {}, IStore, IConnectProps>(
+  states,
+  actions
+)(Tracks)

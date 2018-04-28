@@ -10,14 +10,13 @@ interface IPlaylistState {
 
 const playlistItems = compose<PlaylistsResponse, Playlists, IPlaylistState>(
   assoc('playlists', __, {}),
-  prop('items'),
+  prop('items')
 )
 
 export const actions = {
-  getPlaylists: (_state: IStore, authorization: string) => (
+  getPlaylists: (_state: IStore, authorization: string) =>
     getPlaylists(authorization)
       .map(playlistItems)
       .promise()
-      .catch(console.error)
-  ),
+      .catch(console.error),
 }

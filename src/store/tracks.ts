@@ -9,7 +9,10 @@ export interface ITracksState {
 }
 
 export const actions = (store: UnistoreStore<IStore>) => ({
-  getPlaylistTracks: (_state: IStore, { userId, playlistId, authorization}: IGetPlaylistTracksParams) => (
+  getPlaylistTracks: (
+    _state: IStore,
+    { userId, playlistId, authorization }: IGetPlaylistTracksParams
+  ) =>
     getPlaylistTracks({ userId, playlistId, authorization })
       .map((playlistTracks: PlaylistTracksResponse) => ({
         tracks: {
@@ -18,6 +21,5 @@ export const actions = (store: UnistoreStore<IStore>) => ({
         },
       }))
       .promise()
-      .catch(console.error)
-  ),
+      .catch(console.error),
 })

@@ -12,9 +12,11 @@ export interface IStore {
   authentication: Authentication | null
 }
 
-export default devtools(createStore<IStore>({
-  user: null,
-  tracks: null,
-  playlists: null,
-  authentication: null,
-}))
+export default devtools(
+  createStore<IStore>({
+    user: null,
+    tracks: null,
+    playlists: null,
+    authentication: null,
+  })
+)

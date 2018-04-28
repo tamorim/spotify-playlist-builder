@@ -20,12 +20,11 @@ const paramsFromString = (x: string) => {
 }
 
 export const actions = {
-  getAuthentication: (_state: IStore, url: string) => (
+  getAuthentication: (_state: IStore, url: string) =>
     maybe(splitParams(url))
       .map(paramsFromString)
       .caseOf({
         just: authentication => ({ authentication }),
         nothing: () => ({}),
-      })
-  ),
+      }),
 }

@@ -11,16 +11,13 @@ export interface IFetcherParams {
 }
 
 export const fetcher = ({ url, authorization, options }: IFetcherParams) =>
-  fetchF(
-    url,
-    {
-      mode: 'cors',
-      headers: { authorization },
-      ...options,
-    },
-  )
-  .chain(res => res.ok ? of(res) : reject(res))
-  .chain((res: Response) => tryP(() => res.json()))
+  fetchF(url, {
+    mode: 'cors',
+    headers: { authorization },
+    ...options,
+  })
+    .chain(res => (res.ok ? of(res) : reject(res)))
+    .chain((res: Response) => tryP(() => res.json()))
 
 export const getPlaylists = (authorization: string) =>
   fetcher({ url: PLAYLISTS_URL, authorization })
@@ -34,5 +31,9 @@ export interface IGetPlaylistTracksParams {
   authorization: string
 }
 
-export const getPlaylistTracks = ({ userId, playlistId, authorization }: IGetPlaylistTracksParams) =>
+export const getPlaylistTracks = ({
+  userId,
+  playlistId,
+  authorization,
+}: IGetPlaylistTracksParams) =>
   fetcher({ url: playlistTracksUrl(userId, playlistId), authorization })

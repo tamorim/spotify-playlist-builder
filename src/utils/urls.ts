@@ -7,4 +7,4 @@ export const PLAYLISTS_URL = 'https://api.spotify.com/v1/me/playlists?limit=50'
 export const USER_URL = 'https://api.spotify.com/v1/me'
 
 export const playlistTracksUrl = (userId: string, playlistId: string) =>
- `https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`
+  `https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`

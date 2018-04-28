@@ -28,33 +28,26 @@ class Playlists extends Component<IProps, {}> {
   render(props: IProps) {
     return (
       <div class="flex flex-wrap justify-center w-100">
-        {
-          maybe(props.playlists!)
-            .caseOf({
-              just: playlists => (
-                playlists.map(playlist => (
-                  <Link
-                    class="db w-100 pa4 f3 fw7 no-underline white bg-black-80 bb b--white"
-                    href={`/${playlist.id}/tracks`}
-                  >
-                    { playlist.name }
-                  </Link>
-                ))
-              ),
-              nothing: () => ([
-                <span class="mv4 f2 gray">
-                  No playlists :(
-                </span>,
-              ]),
-            })
-        }
+        {maybe(props.playlists!).caseOf({
+          just: playlists =>
+            playlists.map(playlist => (
+              <Link
+                class="db w-100 pa4 f3 fw7 no-underline white bg-black-80 bb b--white"
+                href={`/${playlist.id}/tracks`}
+              >
+                {playlist.name}
+              </Link>
+            )),
+          nothing: () => [<span class="mv4 f2 gray">No playlists :(</span>],
+        })}
       </div>
     )
   }
 }
 
-const states = [
-  'playlists',
-]
+const states = ['playlists']
 
-export default connect<IComponentProps, {}, IStore, IConnectProps>(states, actions)(Playlists)
+export default connect<IComponentProps, {}, IStore, IConnectProps>(
+  states,
+  actions
+)(Playlists)

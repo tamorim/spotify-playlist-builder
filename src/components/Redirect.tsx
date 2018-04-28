@@ -9,8 +9,7 @@ interface IProps {
 
 class Redirect extends Component<IProps, {}> {
   componentWillMount() {
-    maybe(this.props.onEnter!)
-      .map(onEnter => onEnter())
+    maybe(this.props.onEnter!).map(onEnter => onEnter())
     route(this.props.to, true)
   }
 

@@ -115,8 +115,8 @@ export interface ExternalIds {
 }
 
 export interface TrackSimple {
-  album: AlbumSimple[],
-  artists: Artist[],
+  album: AlbumSimple[]
+  artists: Artist[]
   available_markets: string[]
   disc_number: number
   duration_ms: number

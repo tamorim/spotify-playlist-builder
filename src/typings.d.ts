@@ -1,11 +1,5 @@
 declare module 'unistore' {
-  import {
-    Listener,
-    Unsubscribe,
-    Action,
-    BoundAction,
-    Store
-  } from 'unistore'
+  import { Listener, Unsubscribe, Action, BoundAction, Store } from 'unistore'
   export default function createStore<K>(state?: K): Store<K>
   export type BoundAction = (...args: any[]) => void
   export interface Store<K> {
@@ -25,7 +19,7 @@ declare module 'unistore' {
     StateMapper,
     connect,
     ProviderProps,
-    Provider
+    Provider,
   } from 'unistore/index'
 }
 
